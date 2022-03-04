@@ -127,6 +127,6 @@ async def reminder(ctx):
 
 ###################################################################
 #Discord Bot Token
-token = "OTQ5MDU5NzExNTQwNTQzNDg4.YiE2uw.MFEeMKUKwzNsQSdPtmdCoF5YVi8"
+token = "OTQ5MDU5NzExNTQwNTQzNDg4.YiE2uw.zSaSw7PLUtSixrNFr099vPKrPUo"
 client.run(token)
 ###################################################################
