@@ -1,7 +1,7 @@
 # Pixel
 Pixel A Discord Bot
 
-**A Reminder Bot **
+**A Reminder Bot**
 
 Pixel Is a Auto Reminder Bot that is suppost to automatically send out a message every 6 Hours that Asking users if they have completed a specfic task. 
 When the message is sent the users have 3 Reaction Options to choose from:
