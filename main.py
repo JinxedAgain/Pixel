@@ -25,12 +25,18 @@ async def ar(ctx):
     while True:
         if str(reaction) == f'{checkmark}':
             i = 0
-            await ctx.send('Amazing I will let your friends know!', delete_after=30)
+            await ctx.send('Amazing! Who would you like me to tell?', delete_after=30)
+            mesg = await client.wait_for("message", check=check, timeout=60)
+            if mesg != NULL:
+                await ctx.send(f'Telling {mesg}', delete_after=30)
             # Add function where it dms users from a list eg. @user ate some food today congratulate them!...
         elif str(reaction) == f'{X_No}':
             if i > 0:
                 i -= 1
-            await ctx.send('Thats too bad... Try again tomorrow!', delete_after=30)
+            await ctx.send('Thats too bad... Try again tomorrow! \nWho would you like me to Tell:', delete_after=30)
+            mesg = await client.wait_for("message", check=check, timeout=60)
+            if mesg != NULL:
+                await ctx.send(f'Telling {mesg}', delete_after=30)
             # Add function where it dms users from a list eg. @user didnt eat today give them some motivation... 
         elif str(reaction) == f'{hourglass}':
             if i < 2:
@@ -40,9 +46,6 @@ async def ar(ctx):
                 return m.author == message.author and m.channel == message.channel
             mesg = await client.wait_for("message", check=check, timeout=60)
             time = mesg
-            if time.lower().endswith("d"):
-                seconds += int(time[:-1]) * 60 * 60 * 24
-                counter = f"{seconds // 60 // 60 // 24} Days"
             if time.lower().endswith("h"):
                 seconds += int(time[:-1]) * 60 * 60
                 counter = f"{seconds // 60 // 60} Hours"
@@ -58,42 +61,8 @@ async def ar(ctx):
                 await message_channel.send(f"Alright I will remind you again in {counter}")
                 await asyncio.sleep(counter)
             else:
-                await message_channel.send(f"There Was an Unexpected Error")
-                    
+                await message_channel.send(f"There Was an Unexpected Error")     
         try:
             reaction, user = await client.wait_for("reaction_add", timeout=10.0, check=check)
         except:
             break
-
-#Then loop again in the amount of hours.  
-
-        # else:
-        #     reaction, user = await client.wait_for('reaction_add', timeout = 30.0, check = check)
-        # await message.remove_reaction(reaction, user)
-
-# @client.command(aliases=['stop', 'd'])
-# async def deactivate(ctx):
-#     deactivateEmbed = discord.Embed(title='Would you like me to stop reminding you?', description='✅ Stop reminding you\n❌ Cancel')
-#     msg = await ctx.send(embed=deactivateEmbed, delete_after=30)
-#     await msg.add_reaction('✅')
-#     await msg.add_reaction('❌')
-
-
-# # also add a command where when they react with ❌ or ✅ it breaks the loop and starts the next day. 
-# @client.event
-# async def on_reaction_add(reaction, user):
-#     emoji = reaction.emoji
-#     global activate
-#     activate = False
-
-#     if user.bot:
-#         return
-
-#     if emoji == '✅':
-#         activate = False
-#         await user.send('**I will stop reminding you now.**', delete_after=30)
-#         #msg.cancel() #define function that will break loop and start next day
-
-#     elif emoji == '❌':
-#         await user.send('**I will continue reminding you.**', delete_after=30)
-#         #cancel() #define function that will break loop and start next day
